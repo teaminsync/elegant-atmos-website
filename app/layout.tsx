@@ -19,6 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload custom fonts for better performance */}
+        <link rel="preload" href="/fonts/Butler_Medium.otf" as="font" type="font/otf" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/times.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+      </head>
       <body>
         <ScrollRestoration />
         <SmoothScroll>{children}</SmoothScroll>

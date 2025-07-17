@@ -61,8 +61,8 @@ export function Header() {
           <Image
             src="/images/elegant-atmos-logo.png"
             alt="Elegant Atmos Logo"
-            width={180}
-            height={101}
+            width={114} // Optimized width
+            height={64} // Optimized height
             className="h-16 w-auto"
             priority
           />
@@ -127,8 +127,8 @@ export function Header() {
                 <Image
                   src="/images/elegant-atmos-logo.png"
                   alt="Elegant Atmos Logo"
-                  width={180}
-                  height={101}
+                  width={114} // Optimized width
+                  height={64} // Optimized height
                   className="h-14 w-auto"
                   priority
                 />

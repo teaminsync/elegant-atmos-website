@@ -86,7 +86,7 @@ export function HeroSection() {
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center text-cream-ivory"
+        className="absolute bottom-8 w-full z-30 flex justify-center text-cream-ivory"
         initial={{ y: 0 }}
         animate={{ y: [0, 10, 0] }}
         transition={{
@@ -96,8 +96,10 @@ export function HeroSection() {
           ease: "easeInOut",
         }}
       >
-        <ChevronDown className="h-10 w-10" />
-        <span className="sr-only">Scroll Down</span>
+        <div className="flex flex-col items-center">
+          <ChevronDown className="h-10 w-10" />
+          <span className="sr-only">Scroll Down</span>
+        </div>
       </motion.div>
     </section>
   )
