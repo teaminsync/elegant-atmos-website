@@ -3,12 +3,12 @@ import { FadeInSection } from "@/components/utils/fade-in-section"
 
 export function GallerySection() {
   return (
-    <section id="gallery" className="py-24 md:py-40 bg-earthy-beige">
+    <section id="gallery" className="py-24 md:py-40">
       <div className="container max-w-7xl mx-auto px-6 md:px-8">
         <FadeInSection className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-heading text-deep-forest-green mb-6">Image Gallery</h2>
           <p className="text-xl md:text-2xl text-elegant-charcoal max-w-4xl mx-auto leading-relaxed">
-            A visual journey through the architectural integrity and lifestyle refinement of Elegant Atmos.
+            A visual journey through Elegant Atmos’s architecture and refined living.
           </p>
         </FadeInSection>
 

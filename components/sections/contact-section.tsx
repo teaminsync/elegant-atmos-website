@@ -6,7 +6,7 @@ import { FadeInSection } from "@/components/utils/fade-in-section"
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-24 md:py-40">
+    <section id="contact" className="py-24 md:py-40 bg-earthy-beige">
       <div className="container max-w-5xl mx-auto px-6 md:px-8 text-center">
         <FadeInSection className="mb-20">
           <h2 className="text-5xl md:text-6xl font-heading text-deep-forest-green mb-6">Contact Us</h2>

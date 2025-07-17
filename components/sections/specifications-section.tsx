@@ -224,8 +224,7 @@ export function SpecificationsSection() {
             className="text-xl md:text-2xl text-elegant-charcoal max-w-4xl mx-auto leading-relaxed"
             variants={headerItemVariants}
           >
-            Every detail at Elegant Atmos is meticulously crafted with premium materials and finishes for unparalleled
-            quality.
+            Every detail at Elegant Atmos is crafted with premium materials for unmatched quality.
           </motion.p>
         </motion.div>
 

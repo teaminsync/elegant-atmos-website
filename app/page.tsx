@@ -8,7 +8,6 @@ import { DeveloperProfileSection } from "@/components/sections/developer-profile
 import { AmenitiesSection } from "@/components/sections/amenities-section"
 import { MasterPlanLayoutsSection } from "@/components/sections/master-plan-layouts-section"
 import { SpecificationsSection } from "@/components/sections/specifications-section"
-import { HealthWellbeingSection } from "@/components/sections/health-wellbeing-section"
 import { GallerySection } from "@/components/sections/gallery-section"
 import { ContactSection } from "@/components/sections/contact-section"
 
@@ -27,7 +26,6 @@ export default function ElegantAtmosMicrosite() {
         <AmenitiesSection />
         <MasterPlanLayoutsSection />
         <SpecificationsSection />
-        <HealthWellbeingSection />
         <GallerySection />
         <ContactSection />
       </main>
