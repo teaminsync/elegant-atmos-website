@@ -38,7 +38,7 @@ export function GallerySection() {
 
   const sectionRef = useRef<HTMLElement>(null)
   const [inViewRef, inView] = useInView({
-    threshold: 0.1, // Trigger when 10% of the section is visible
+    threshold: 0.01, 
     triggerOnce: true, // Only animate once when it enters the viewport
   })
 

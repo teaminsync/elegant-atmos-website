@@ -246,7 +246,7 @@ export function SpecificationsSection() {
                   {category.title}
                 </motion.h3>
 
-                <ul className="list-disc list-outside ml-2 space-y-2 text-base sm:text-lg md:text-xl text-elegant-charcoal">
+                <ul className="list-disc list-outside ml-2 space-y-2 text-lg sm:text-lg md:text-xl text-elegant-charcoal">
                   {category.items.map((item, itemIndex) => (
                     <motion.li
                       key={itemIndex}
