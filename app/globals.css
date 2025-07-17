@@ -21,10 +21,12 @@
 
 html,
 body {
-  background-color: #fef7e5; /* Cream Ivory */
-  color: #3a3a3a; /* Elegant Charcoal */
-  font-family: "Times New Roman", serif; /* Now explicitly uses your custom Times New Roman */
-  scroll-behavior: smooth; /* For smooth scrolling to sections */
+background-color: #fef7e5; /* Cream Ivory */
+color: #3a3a3a; /* Elegant Charcoal */
+font-family: "Times New Roman", serif; /* Now explicitly uses your custom Times New Roman */
+scroll-behavior: smooth; /* For smooth scrolling to sections */
+width: 100%; /* Ensure full width */
+overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 h1,
