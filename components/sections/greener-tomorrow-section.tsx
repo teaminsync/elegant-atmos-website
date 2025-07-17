@@ -1,56 +1,106 @@
+"use client"
+
+import { useRef } from "react"
 import Image from "next/image"
-import { CheckCircle, Factory } from "lucide-react"
-import { FadeInSection } from "@/components/utils/fade-in-section"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useInView } from "react-intersection-observer"
 
 export function GreenerTomorrowSection() {
+  const containerRef = useRef<HTMLElement>(null)
+  const [inViewRef, inView] = useInView({
+    threshold: 0.3,
+    triggerOnce: true, // Changed to true for one-time animation
+  })
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100])
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.7, 1, 1, 0.7])
+
+  const setCombinedRef = (el: HTMLElement | null) => {
+    if (el) {
+      containerRef.current = el
+      inViewRef(el)
+    }
+  }
+
+  const features = [
+    "IGBC Silver Certified (60-69 points)",
+    "Solar water heating",
+    "Rainwater harvesting",
+    "Waste recycling",
+    "On-site Sewage Treatment Plant (STP)",
+    "Treated water reused for landscaping & flushing",
+    "Conserves groundwater",
+  ]
+
   return (
-    <section className="py-24 md:py-40">
-      <div className="container max-w-7xl mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-16 items-center">
-        <FadeInSection className="space-y-8">
-          <h2 className="text-5xl md:text-6xl font-heading text-deep-forest-green leading-tight">A Greener Tomorrow</h2>
-          <p className="text-xl text-elegant-charcoal leading-relaxed">
-            Elegant Atmos sets a new benchmark for sustainable luxury living, integrating advanced eco-friendly
-            practices and certifications into its core design.
-          </p>
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-3xl font-heading text-deep-forest-green flex items-center gap-3 mb-3">
-                <CheckCircle className="h-8 w-8 text-warm-gold" /> IGBC Silver Certification
-              </h3>
-              <p className="text-lg text-elegant-charcoal leading-relaxed">
-                Elegant Atmos has been awarded a Silver rating by the Indian Green Building Council (IGBC), earning
-                60–69 points. This reflects the project’s commitment to responsible, sustainable development. Key
-                sustainability features include:
-              </p>
-              <ul className="list-disc list-inside ml-6 mt-4 text-elegant-charcoal text-base">
-                <li>Solar water heating</li>
-                <li>Rainwater harvesting</li>
-                <li>Waste recycling</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-3xl font-heading text-deep-forest-green flex items-center gap-3 mb-3">
-                <Factory className="h-8 w-8 text-warm-gold" /> Smart Sewage Management
-              </h3>
-              <p className="text-lg text-elegant-charcoal leading-relaxed">
-                With its on-site Sewage Treatment Plant (STP), Elegant Atmos sets a sustainability benchmark aligned
-                with Bengaluru’s shift toward decentralized wastewater systems. Treated water is reused for landscaping
-                and toilet flushing — easing municipal load, conserving groundwater, and enabling sustainable living in
-                a water-stressed city.
-              </p>
-            </div>
+    <section ref={setCombinedRef} className="py-24 md:py-24">
+      {" "}
+      {/* Reduced py-24 md:py-40 to py-16 md:py-24 */}
+      <div className="container max-w-7xl mx-auto px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+          {/* Text Content - lg:col-span-5 */}
+          <div className="lg:col-span-5 space-y-6">
+            {" "}
+            {/* Reverted space-y from 4 to 6 */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              transition={{ duration: 0.6 }}
+              className="text-warm-gold text-base font-medium tracking-wider font-bold" // Added font-bold
+            >
+              PROJECT HIGHLIGHTS
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, x: -50 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-[2.21rem] lg:text-[3.17rem] font-heading text-deep-forest-green leading-tight"
+            >
+              A Greener Tomorrow
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, x: -50 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl text-elegant-charcoal leading-relaxed"
+            >
+              Elegant Atmos sets a new benchmark for sustainable luxury living, integrating advanced eco-friendly
+              practices and certifications into its core design.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3"
+            >
+              {features.map((feature, idx) => (
+                <div key={idx} className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-warm-gold mt-2 rounded-full flex-shrink-0" />
+                  <span className="text-elegant-charcoal font-medium">{feature}</span>
+                </div>
+              ))}
+            </motion.div>
           </div>
-        </FadeInSection>
-        <FadeInSection>
-          {/* REPLACE THIS PLACEHOLDER IMAGE with your actual high-resolution WebP image */}
-          <Image
-            src="/placeholder.svg?text=Rooftops+-+Sky+Work+Hubs+and+Solar+Panels"
-            alt="Sustainable Rooftops with Sky work hubs and solar panels"
-            width={900}
-            height={700}
-            className="rounded-lg shadow-lg object-cover w-full h-auto"
-          />
-        </FadeInSection>
+
+          {/* Image Content - lg:col-span-7 */}
+          <div className="lg:col-span-7">
+            <motion.div style={{ y, opacity }} className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+              <Image
+                src="/placeholder.svg?text=Rooftops+-+Sky+Work+Hubs+and+Solar+Panels"
+                alt="Sustainable Rooftops with Sky work hubs and solar panels"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 60vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-bl from-transparent to-deep-forest-green/20" />
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )
