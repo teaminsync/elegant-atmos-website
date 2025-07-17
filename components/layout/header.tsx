@@ -2,12 +2,42 @@
 
 import Link from "next/link"
 import { Mountain, Menu } from "lucide-react"
-
+import { useState, useEffect } from "react" // Import useState and useEffect
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils" // Import cn utility for conditional class names
 
 export function Header() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Set scrolled to true if window.scrollY is greater than a small threshold (e.g., 10px)
+      // This prevents the background from appearing on initial load if not scrolled.
+      if (window.scrollY > 10) {
+        setScrolled(true)
+      } else {
+        setScrolled(false)
+      }
+    }
+
+    // Add the scroll event listener when the component mounts
+    window.addEventListener("scroll", handleScroll)
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, []) // Empty dependency array ensures this effect runs only once on mount
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-cream-ivory/90 backdrop-blur-sm px-4 lg:px-8 h-20 flex items-center justify-between border-b border-soft-sand-grey">
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 h-20 flex items-center justify-between px-4 lg:px-8 transition-all duration-300 ease-in-out",
+        scrolled
+          ? "bg-cream-ivory/90 backdrop-blur-sm border-b border-soft-sand-grey" // Scrolled state
+          : "bg-transparent border-b-transparent", // Initial transparent state
+      )}
+    >
       <Link href="#" className="flex items-center gap-2 font-heading text-2xl text-deep-forest-green">
         <Mountain className="h-8 w-8 text-warm-gold" />
         Elegant Atmos

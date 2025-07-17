@@ -2,42 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-  IMPORTANT NOTE ON FONTS:
-  The prompt specifies 'Butler' for headings and 'Times New Roman' for body.
-  'Times New Roman' is a common system font and should render correctly.
-
-  For 'Butler', you MUST acquire the font files (e.g., .woff2) and
-  host them in your `public/fonts/` directory. Then, UNCOMMENT and
-  configure the `@font-face` rules below to load them.
-
-  Without loading 'Butler', a generic serif font will be used,
-  which will significantly impact the "premium" and "editorial" aesthetic.
-*/
-
-/*
+/* Custom Fonts */
 @font-face {
-  font-family: 'Butler';
-  src: url('/fonts/Butler-Regular.woff2') format('woff2');
+  font-family: "Butler";
+  src: url("/fonts/Butler_Medium.otf") format("opentype");
+  font-weight: 500; /* Assuming 'Medium' corresponds to 500 */
+  font-style: normal;
+  font-display: swap; /* Ensures text remains visible during font load */
+}
+
+@font-face {
+  font-family: "Times New Roman";
+  src: url("/fonts/times.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: swap; /* Ensures text remains visible during font load */
 }
-
-@font-face {
-  font-family: 'Butler';
-  src: url('/fonts/Butler-Bold.woff2') format('woff2');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-*/
 
 html,
 body {
   background-color: #fef7e5; /* Cream Ivory */
   color: #3a3a3a; /* Elegant Charcoal */
-  font-family: "Times New Roman", serif; /* Default body font, will use system Times New Roman */
+  font-family: "Times New Roman", serif; /* Now explicitly uses your custom Times New Roman */
   scroll-behavior: smooth; /* For smooth scrolling to sections */
 }
 
@@ -47,7 +33,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Butler", serif; /* Will use Butler if loaded, otherwise a generic serif */
+  font-family: "Butler", serif; /* Now explicitly uses your custom Butler font */
   color: #2d4030; /* Deep Forest Green */
 }
 

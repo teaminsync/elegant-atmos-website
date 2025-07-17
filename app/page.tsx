@@ -16,9 +16,9 @@ export default function ElegantAtmosMicrosite() {
   return (
     <div className="min-h-screen bg-cream-ivory text-elegant-charcoal font-body">
       <Header />
-      <main className="pt-20">
+      <main className="">
         {" "}
-        {/* Offset for fixed header */}
+        {/* Removed pt-20 here */}
         <HeroSection />
         <FivePositivesSection />
         <GreenerTomorrowSection />

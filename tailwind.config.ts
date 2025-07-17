@@ -81,10 +81,8 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        // 'Butler' will be used if loaded via @font-face in globals.css
-        heading: ["Butler", "serif"],
-        // 'Times New Roman' will be used if available as a system font
-        body: ["Times New Roman", "serif"],
+        heading: ["Butler", "serif"], // Uses your custom Butler font
+        body: ["Times New Roman", "serif"], // Uses your custom Times New Roman font
       },
     },
   },

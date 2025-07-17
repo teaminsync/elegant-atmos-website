@@ -7,7 +7,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full h-[calc(100vh-5rem)] flex items-center justify-center text-classic-white overflow-hidden"
+      className="relative w-full min-h-screen pt-20 flex items-center justify-center text-classic-white overflow-hidden" // Added pt-20 and changed to min-h-screen
     >
       {/* REPLACE THIS PLACEHOLDER IMAGE with your actual high-resolution WebP hero image */}
       <Image

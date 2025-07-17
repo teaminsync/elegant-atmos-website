@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
+// Removed Inter font import as custom fonts are now used
 import "./globals.css"
 import SmoothScroll from "@/components/smooth-scroll"
 import ScrollRestoration from "@/components/scroll-restoration"
