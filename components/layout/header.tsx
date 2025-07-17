@@ -85,7 +85,7 @@ export function Header() {
           className={cn(
             "hidden md:inline-flex px-8 py-4 text-lg rounded transition-colors duration-300",
             scrolled
-              ? "bg-deep-forest-green text-classic-white border border-deep-forest-green hover:bg-deep-forest-green/90"
+              ? "bg-deep-forest-green text-cream-ivory border border-deep-forest-green hover:bg-deep-forest-green/90"
               : "bg-warm-gold text-deep-forest-green border border-warm-gold hover:bg-warm-gold/90",
           )}
           asChild
@@ -153,7 +153,7 @@ export function Header() {
               ))}
             </nav>
             <Button
-              className="px-10 py-5 text-xl rounded shadow-lg bg-deep-forest-green text-classic-white border border-deep-forest-green hover:bg-deep-forest-green/90 transition-colors"
+              className="px-10 py-5 text-xl rounded shadow-lg bg-deep-forest-green text-cream-ivory border border-deep-forest-green hover:bg-deep-forest-green/90 transition-colors"
               asChild
             >
               <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)}>

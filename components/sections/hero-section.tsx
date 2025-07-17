@@ -11,7 +11,7 @@ export function HeroSection() {
     >
       {/* REPLACE THIS PLACEHOLDER IMAGE with your actual high-resolution WebP hero image */}
       <Image
-        src="/placeholder.svg?text=Hero+Image+-+Spacious+Rooms"
+        src="/images/hero-image.jpg"
         alt="Elegant Atmos Hero - Spacious rooms, open kitchens, luxury bathrooms"
         width={1920}
         height={1080}
@@ -30,17 +30,10 @@ export function HeroSection() {
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-6 mt-10">
           <Button
-            className="bg-warm-gold text-classic-white hover:bg-warm-gold/90 px-10 py-4 text-xl font-semibold rounded-full shadow-lg"
+            className="bg-deep-forest-green text-cream-ivory border border-deep-forest-green hover:bg-deep-forest-green/90 px-10 py-4 text-xl rounded"
             asChild
           >
-            <Link href="#contact">Enquire Now</Link>
-          </Button>
-          <Button
-            variant="outline"
-            className="border-classic-white text-classic-white hover:bg-classic-white hover:text-deep-forest-green px-10 py-4 text-xl font-semibold rounded-full shadow-lg bg-transparent"
-            asChild
-          >
-            <Link href="#five-positives">Explore Sustainability</Link>
+            <Link href="#contact">Explore Homes</Link>
           </Button>
         </div>
       </FadeInSection>
