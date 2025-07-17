@@ -41,7 +41,7 @@ export function HeroSection() {
     >
       {/* REPLACE THIS PLACEHOLDER IMAGE with your actual high-resolution WebP hero image */}
       <Image
-        src="/images/"
+        src="/images/hero-image.jpg"
         alt="Elegant Atmos Hero - Spacious rooms, open kitchens, luxury bathrooms"
         width={1920}
         height={1080}
@@ -58,7 +58,7 @@ export function HeroSection() {
       >
         {/* Apply motion.h1 with item variants */}
         <motion.h1
-          className="text-[25px] md:text-7xl font-heading leading-tight drop-shadow-lg text-warm-gold" // Set to 25px for mobile
+          className="text-4xl md:text-7xl font-heading leading-tight drop-shadow-lg text-warm-gold" // Set to 25px for mobile
           variants={itemVariants}
         >
           Inspired by nature.
@@ -67,7 +67,7 @@ export function HeroSection() {
         </motion.h1>
         {/* Apply motion.p with item variants */}
         <motion.p
-          className="text-[13px] md:text-xl font-body max-w-3xl mx-auto leading-relaxed" // Set to 13px for mobile
+          className="text-base md:text-xl font-body max-w-3xl mx-auto leading-relaxed" // Set to 13px for mobile
           variants={itemVariants}
         >
           Elegant Atmos offers luxury, consciously crafted living in Yelahanka, North Bengaluru with 136 exclusive
