@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Elegant Atmos - Luxury Living",
   description:
     "Luxury, consciously crafted - Welcome to Elegant Atmos, where luxury meets conscious living in the heart of Yelahanka, North Bengaluru.",
-  generator: "v0.dev",
+  generator: "InSync Solutions",
 }
 
 export default function RootLayout({
