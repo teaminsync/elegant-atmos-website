@@ -105,9 +105,7 @@ export function LocationSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl text-elegant-charcoal leading-relaxed"
             >
-              Located in Yelahanka, North Bengaluru, Elegant Atmos provides quick access to business hubs, schools,
-              shopping, and sports. Bordering the GKVK campus, it offers green tranquility, city convenience, and strong
-              investment value.
+              In Yelahanka, North Bengaluru, Elegant Atmos offers fast access to business hubs, schools, shopping, and sports. Adjacent to GKVK, it blends greenery, convenience, and investment value.
             </motion.p>
 
             <motion.h3
@@ -125,10 +123,10 @@ export function LocationSection() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="list-disc list-outside space-y-3 text-elegant-charcoal text-lg ml-4"
             >
-              <li>Beside GKVK College — Yelahanka’s green lungs with 100,000+ trees.</li>
-              <li>Sustainable living with natural materials and zero-waste systems.</li>
-              <li>Close to Manyata Tech Park and key employment zones.</li>
-              <li>Linked to new infrastructure and arterial roads of North Bengaluru.</li>
+              <li>Beside GKVK — Yelahanka’s green lungs with 100K+ trees.</li>
+              <li>Eco-living with natural materials and zero waste.</li>
+              <li>Close to Manyata Tech Park and job hubs.</li>
+              <li>Connected to new roads and infrastructure.</li>
             </motion.ul>
           </div>
         </div>
