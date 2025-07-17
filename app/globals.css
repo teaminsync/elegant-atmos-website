@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  IMPORTANT NOTE ON FONTS:
+  The prompt specifies 'Butler' for headings and 'Times New Roman' for body.
+  'Times New Roman' is a common system font and should render correctly.
+
+  For 'Butler', you MUST acquire the font files (e.g., .woff2) and
+  host them in your `public/fonts/` directory. Then, UNCOMMENT and
+  configure the `@font-face` rules below to load them.
+
+  Without loading 'Butler', a generic serif font will be used,
+  which will significantly impact the "premium" and "editorial" aesthetic.
+*/
+
+/*
+@font-face {
+  font-family: 'Butler';
+  src: url('/fonts/Butler-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Butler';
+  src: url('/fonts/Butler-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+html,
+body {
+  background-color: #fef7e5; /* Cream Ivory */
+  color: #3a3a3a; /* Elegant Charcoal */
+  font-family: "Times New Roman", serif; /* Default body font, will use system Times New Roman */
+  scroll-behavior: smooth; /* For smooth scrolling to sections */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Butler", serif; /* Will use Butler if loaded, otherwise a generic serif */
+  color: #2d4030; /* Deep Forest Green */
+}
+
+/* Enhanced Fade-in animation for sections */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
