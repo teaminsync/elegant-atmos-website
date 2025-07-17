@@ -41,7 +41,7 @@ export function HeroSection() {
     >
       {/* REPLACE THIS PLACEHOLDER IMAGE with your actual high-resolution WebP hero image */}
       <Image
-        src="/images/hero-image.jpg"
+        src="/images/"
         alt="Elegant Atmos Hero - Spacious rooms, open kitchens, luxury bathrooms"
         width={1920}
         height={1080}
