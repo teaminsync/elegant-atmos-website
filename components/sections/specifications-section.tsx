@@ -22,8 +22,8 @@ import { useRef } from "react"
 export function SpecificationsSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const [inViewRef, inView] = useInView({
-    threshold: 0.01, // Trigger when 10% of the section is visible
-    triggerOnce: true, // Only animate once when it enters the viewport
+    threshold: 0.01, 
+    triggerOnce: true, 
   })
 
   const setCombinedRef = (el: HTMLElement | null) => {

@@ -8,7 +8,7 @@ import { useInView } from "react-intersection-observer"
 export function GreenerTomorrowSection() {
   const containerRef = useRef<HTMLElement>(null)
   const [inViewRef, inView] = useInView({
-    threshold: 0.3,
+    threshold: 0.1,
     triggerOnce: true, // Changed to true for one-time animation
   })
 
