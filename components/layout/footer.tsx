@@ -157,6 +157,17 @@ export function Footer() {
           <p className="text-soft-sand-grey text-sm font-body">
             © {new Date().getFullYear()} Elegant Atmos. All rights reserved.
           </p>
+          <p className="text-soft-sand-grey text-xs font-body mt-1">
+            Designed & Developed by{" "}
+            <a
+              href="https://www.instagram.com/insync.solutions/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-warm-gold hover:text-classic-white transition-colors font-medium"
+            >
+              InSync Solutions
+            </a>
+          </p>
           <motion.button
             onClick={scrollToTop}
             whileHover={{ scale: 1.1, y: -2 }}

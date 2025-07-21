@@ -1,13 +1,28 @@
 "use client"
 
-import { MapPin, Phone, Mail } from "lucide-react"
+import type React from "react"
+
+import { MapPin, Phone, Mail, Loader2 } from "lucide-react" // Import Loader2
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { motion, type Variants } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { useRef } from "react"
+import { useRef, useState } from "react" // Import useState
 import Image from "next/image" // Import Image component
+import { toast } from "@/hooks/use-toast" // Import toast
+
+// Define types for form data and errors
+interface FormData {
+  name: string
+  email: string
+  phone: string
+  message: string
+}
+
+interface FormErrors {
+  [key: string]: string
+}
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -98,6 +113,95 @@ export function ContactSection() {
     },
   }
 
+  // Form state and handlers
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  })
+  const [errors, setErrors] = useState<FormErrors>({})
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }))
+    }
+  }
+
+  const validateForm = () => {
+    const newErrors: FormErrors = {}
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required"
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required"
+    }
+    if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid"
+    }
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!validateForm()) return
+
+    setIsSubmitting(true)
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+      const result = await response.json()
+
+      if (result.success) {
+        toast({
+          title: "Message Sent Successfully",
+          description: "Thank you for contacting Elegant Atmos. We'll get back to you soon!",
+          variant: "default", // Changed from "success" to "default"
+          duration: 4000,
+        })
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        })
+      } else {
+        toast({
+          title: "Something went wrong",
+          description: result.message || "Please try again or contact us directly.",
+          variant: "destructive",
+          duration: 4000,
+        })
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      toast({
+        title: "Error",
+        description: "Unable to submit form. Please check your internet connection.",
+        variant: "destructive",
+        duration: 4000,
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <section id="contact" ref={setCombinedRef} className="py-24 md:py-40 bg-earthy-beige">
       <div className="container max-w-7xl mx-auto px-6 md:px-8 text-center">
@@ -131,16 +235,20 @@ export function ContactSection() {
           <motion.div variants={formVariants}>
             <div className="py-8">
               <h3 className="text-3xl font-heading text-deep-forest-green mb-8 text-left">Send Us a Message</h3>
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-warm-charcoal text-lg font-medium mb-2">
-                    Name
+                    Name <span className="text-elegant-charcoal">*</span>
                   </label>
                   <Input
                     id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder=""
-                    className="bg-white border-soft-sand-grey focus:border-warm-gold focus-visible:ring-warm-gold h-12 text-lg px-4 rounded"
+                    className={`bg-white border-soft-sand-grey focus:border-warm-gold focus-visible:ring-warm-gold h-12 text-lg px-4 rounded ${errors.name ? "border-red-500" : ""}`}
                   />
+                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
@@ -149,20 +257,28 @@ export function ContactSection() {
                     </label>
                     <Input
                       id="email"
+                      name="email"
                       type="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       placeholder=""
-                      className="bg-white border-soft-sand-grey focus:border-warm-gold focus-visible:ring-warm-gold h-12 text-lg px-4 rounded"
+                      className={`bg-white border-soft-sand-grey focus:border-warm-gold focus-visible:ring-warm-gold h-12 text-lg px-4 rounded ${errors.email ? "border-red-500" : ""}`}
                     />
+                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
                   <div>
                     <label htmlFor="phone" className="block text-elegant-charcoal text-lg font-medium mb-2">
-                      Phone
+                      Phone <span className="text-elegant-charcoal">*</span>
                     </label>
                     <Input
                       id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
                       placeholder="+91"
-                      className="bg-white border-soft-sand-grey focus:border-warm-gold focus-visible:ring-warm-gold h-12 text-lg px-4 rounded"
+                      className={`bg-white border-soft-sand-grey focus:border-warm-gold focus-visible:ring-warm-gold h-12 text-lg px-4 rounded ${errors.phone ? "border-red-500" : ""}`}
                     />
+                    {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                   </div>
                 </div>
                 <div>
@@ -171,6 +287,9 @@ export function ContactSection() {
                   </label>
                   <Textarea
                     id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     placeholder="Enter your message"
                     rows={6}
                     className="bg-white border-soft-sand-grey focus:border-warm-gold focus-visible:ring-warm-gold text-lg p-4 rounded"
@@ -179,8 +298,16 @@ export function ContactSection() {
                 <Button
                   type="submit"
                   className="w-full bg-deep-forest-green text-classic-white hover:bg-deep-forest-green/90 py-4 text-xl rounded"
+                  disabled={isSubmitting}
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Message"
+                  )}
                 </Button>
               </form>
             </div>
@@ -221,54 +348,51 @@ export function ContactSection() {
         </motion.div>
 
         {/* NEW: Certifications & Partnerships Section */}
-{/* NEW: Certifications & Partnerships Section */}
-<motion.div
-  className="pt-12 text-classic-white"
-  initial="hidden"
-  animate={inView ? "visible" : "hidden"}
-  variants={contentContainerVariants}
->
-  <motion.h3
-    className="text-3xl font-heading text-deep-forest-green mb-8 text-center"
-    variants={headerItemVariants}
-  >
-    Certifications & Partnerships
-  </motion.h3>
-  <div className="flex flex-col sm:flex-row items-center justify-center gap-8 px-4">
-    <motion.div variants={certificationImageVariants} className="flex flex-col items-center">
-      <Image
-        src="/placeholder.svg?text=IGBC"
-        alt="IGBC Member"
-        width={150}
-        height={150}
-        className="h-24 w-auto object-contain"
-      />
-      <p className="mt-2 text-sm text-center text-elegant-charcoal">[IGBC Member]</p>
-    </motion.div>
-    <motion.div variants={certificationImageVariants} className="flex flex-col items-center">
-      <Image
-        src="/placeholder.svg?text=CREDAI"
-        alt="CREDAI Bengaluru"
-        width={200}
-        height={100}
-        className="h-24 w-auto object-contain"
-      />
-      <p className="mt-2 text-sm text-center text-elegant-charcoal">[CREDAI Bengaluru]</p>
-    </motion.div>
-    <motion.div variants={certificationImageVariants} className="flex flex-col items-center">
-      <Image
-        src="/placeholder.svg?text=NET+ZERO"
-        alt="Net Zero India Summit"
-        width={200}
-        height={100}
-        className="h-24 w-auto object-contain"
-      />
-      <p className="mt-2 text-sm text-center text-elegant-charcoal">[Net Zero India Summit]</p>
-    </motion.div>
-  </div>
-</motion.div>
-
-
+        <motion.div
+          className="pt-12 text-classic-white"
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={contentContainerVariants}
+        >
+          <motion.h3
+            className="text-3xl font-heading text-deep-forest-green mb-8 text-center"
+            variants={headerItemVariants}
+          >
+            Certifications & Partnerships
+          </motion.h3>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 px-4">
+            <motion.div variants={certificationImageVariants} className="flex flex-col items-center">
+              <Image
+                src="/placeholder.svg?text=IGBC"
+                alt="IGBC Member"
+                width={150}
+                height={150}
+                className="h-24 w-auto object-contain"
+              />
+              <p className="mt-2 text-sm text-center text-elegant-charcoal">[IGBC Member]</p>
+            </motion.div>
+            <motion.div variants={certificationImageVariants} className="flex flex-col items-center">
+              <Image
+                src="/placeholder.svg?text=CREDAI"
+                alt="CREDAI Bengaluru"
+                width={200}
+                height={100}
+                className="h-24 w-auto object-contain"
+              />
+              <p className="mt-2 text-sm text-center text-elegant-charcoal">[CREDAI Bengaluru]</p>
+            </motion.div>
+            <motion.div variants={certificationImageVariants} className="flex flex-col items-center">
+              <Image
+                src="/placeholder.svg?text=NET+ZERO"
+                alt="Net Zero India Summit"
+                width={200}
+                height={100}
+                className="h-24 w-auto object-contain"
+              />
+              <p className="mt-2 text-sm text-center text-elegant-charcoal">[Net Zero India Summit]</p>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
